@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expedição Express - Leitor de XML</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="no-print">
+        <h1>Sistema de Expedição</h1>
+        <p>Selecione o arquivo XML da Nota Fiscal para gerar o romaneio.</p>
+    </header>
+
+    <main class="no-print">
+        <div class="upload-container">
+            <input type="file" id="xmlInput" accept=".xml">
+            <label for="xmlInput">Escolher Arquivo XML</label>
+        </div>
+    </main>
+
+    <div id="printArea" class="print-only">
+        <div class="header-nota">
+            <h2 id="tituloRomaneio">ROMANEIO DE EXPEDIÇÃO</h2>
+            <div class="info-geral">
+                <p><strong>Nota Fiscal:</strong> <span id="outNF">---</span></p>
+                <p><strong>Data de Emissão:</strong> <span id="outData">---</span></p>
+            </div>
+        </div>
+
+        <section class="dados-secao">
+            <h3>Destinatário</h3>
+            <p id="outDestinatario">---</p>
+        </section>
+
+        <section class="dados-secao">
+            <h3>Logística</h3>
+            <p><strong>Transportadora:</strong> <span id="outTransportadora">---</span></p>
+            <p><strong>Volume Total:</strong> <span id="outVolumes">---</span></p>
+        </section>
+
+        <section class="dados-secao">
+            <h3>Itens da Nota</h3>
+            <table id="tabelaItens">
+                <thead>
+                    <tr>
+                        <th>Qtd</th>
+                        <th>Descrição do Produto</th>
+                        <th>Conferido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </section>
+
+        <button onclick="window.print()" class="btn-print no-print">Imprimir para Expedição</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

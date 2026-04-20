@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+}
+
+.no-print { display: block; }
+.upload-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    border: 2px dashed #ccc;
+}
+
+#printArea {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h3 { border-bottom: 2px solid #333; padding-bottom: 5px; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.btn-print {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+/* REGRAS DE IMPRESSÃO */
+@media print {
+    .no-print { display: none !important; }
+    body { background: white; padding: 0; }
+    #printArea { box-shadow: none; margin: 0; width: 100%; }
+    table th { background-color: #eee !important; }
+}
