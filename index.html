@@ -3,59 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expedição Express - Leitor de XML</title>
+    <title>Expedição - Romaneio Profissional</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="no-print">
         <h1>Sistema de Expedição</h1>
-        <p>Selecione o arquivo XML da Nota Fiscal para gerar o romaneio.</p>
+        <p>Ajuste as informações necessárias e clique em imprimir.</p>
     </header>
 
     <main class="no-print">
         <div class="upload-container">
             <input type="file" id="xmlInput" accept=".xml">
-            <label for="xmlInput">Escolher Arquivo XML</label>
+            <label for="xmlInput" style="cursor: pointer; font-weight: bold;">[ Escolher XML da Nota ]</label>
         </div>
+
+        <div class="config-container">
+            <label for="responsavelSelect"><strong>Selecionar Responsável:</strong></label>
+            <select id="responsavelSelect">
+                <option value="">-- Selecione o Responsável --</option>
+                <option value=" / PF-CAROLINE">1: / PF-CAROLINE</option>
+                <option value=" / PF-SARA">2: / PF-SARA</option>
+                <option value=" / PF-NICOLY">3: / PF-NICOLY</option>
+                <option value=" / MERCADO LIVRE">4: / MERCADO LIVRE</option>
+            </select>
+        </div>
+        <button id="addItemBtn" class="btn-secundario no-print">+ Adicionar Novo Item</button>
     </main>
 
-    <div id="printArea" class="print-only">
-        <div class="header-nota">
-            <h2 id="tituloRomaneio">ROMANEIO DE EXPEDIÇÃO</h2>
-            <div class="info-geral">
-                <p><strong>Nota Fiscal:</strong> <span id="outNF">---</span></p>
-                <p><strong>Data de Emissão:</strong> <span id="outData">---</span></p>
+    <div id="printArea">
+        <div class="conteudo-flexivel">
+            <div class="header-nota">
+                <div class="titulo-container">
+                    <span class="tag-topo">NOTA FISCAL</span>
+                    <div id="outNF" class="nf-gigante">---</div>
+                </div>
+                <div class="dados-data">
+                    <strong>DATA:</strong> <span id="outData">---</span>
+                </div>
             </div>
+
+            <section class="dados-secao">
+                <div class="tag-secao">DESTINATÁRIO</div>
+                <p class="texto-destaque">
+                    <span id="outDestinatario">---</span><span id="outResponsavel" style="color: #d32f2f;"></span>
+                </p>
+            </section>
+
+            <section class="dados-secao">
+                <div class="tag-secao">LOGÍSTICA</div>
+                <div class="grid-logistica">
+                    <p><strong>TRANSP:</strong> <span id="outTransportadora" class="texto-transp">---</span></p>
+                    <div class="vol-container">
+                        <strong>VOLUMES:</strong> 
+                        <input type="text" id="outVolumes" class="vol-gigante" value="1">
+                    </div>
+                </div>
+            </section>
+
+            <section class="dados-secao tabela-container">
+                <div class="tag-secao">ITENS PARA CONFERÊNCIA</div>
+                <table id="tabelaItens">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">QTD</th>
+                            <th style="width: 75%;">DESCRIÇÃO DO PRODUTO</th>
+                            <th style="width: 10%;">CONF.</th>
+                            <th class="no-print" style="width: 5%;"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
         </div>
-
-        <section class="dados-secao">
-            <h3>Destinatário</h3>
-            <p id="outDestinatario">---</p>
-        </section>
-
-        <section class="dados-secao">
-            <h3>Logística</h3>
-            <p><strong>Transportadora:</strong> <span id="outTransportadora">---</span></p>
-            <p><strong>Volume Total:</strong> <span id="outVolumes">---</span></p>
-        </section>
-
-        <section class="dados-secao">
-            <h3>Itens da Nota</h3>
-            <table id="tabelaItens">
-                <thead>
-                    <tr>
-                        <th>Qtd</th>
-                        <th>Descrição do Produto</th>
-                        <th>Conferido</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    </tbody>
-            </table>
-        </section>
-
-        <button onclick="window.print()" class="btn-print no-print">Imprimir para Expedição</button>
     </div>
+
+    <button onclick="window.print()" class="btn-print no-print">Imprimir Romaneio</button>
 
     <script src="script.js"></script>
 </body>
