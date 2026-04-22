@@ -1,3 +1,33 @@
+// Dicionário de Transportadoras
+const transpMap = {
+    "AMAZON TRANSPORTES LTDA": "AMAZON",
+    "ATUAL CARGAS TRANSPORTES LTDA": "ATUAL",
+    "CJP EXPRESS LOG TRANSPORTES LTDA": "CJP",
+    "CW LOGISTICA EM TRANSPORTES LTDA": "CWLOG",
+    "DMARI - LOCACAO, TRANSPORTES E LOGISTICA LTDA": "DMARI",
+    "ELLLOG LOGISTICA E TRANSPORTES EIRELI": "ELLLOG",
+    "FAST-X TRANSPORTES LTDA": "FASTX",
+    "RAPIDO FIGUEIREDO LOGISTICA E TRANSPORTES LTDA": "FIGUEIREDO",
+    "TJ4 TRANSPORTES EIRELI": "FRILOG",
+    "V.M.RAMOS & CIA LTDA": "GENEROSO",
+    "LG DE CAMPOS TRANSPORTES": "IDEIA/LG",
+    "LEMA REZENDE TRANSPORTES LTDA": "LEMA",
+    "MIR TRANSPORTES E LOGISTICA LTDA": "MIRIN",
+    "RAPIDO PANAMERICANO LTDA": "PANAMERICANO",
+    "PASSARO TRANSPORTES LTDA": "PASSARO",
+    "RODOGARCIA TRANSPORTES RODOVIARIOS LTDA": "RODOGARCIA",
+    "SOLIDEZ TRANSPORTES LTDA": "SOLIDEZ",
+    "SPEED TRANSPORTE MULTIMODAL DE CARGAS LIMITADA": "SPEED",
+    "TADEX TRANSPORTES LTDA.": "TADEX",
+    "TRANS CJ TRANSPORTE E LOGISTICA LTDA": "TRANSCJ",
+    "HB TRANSPORTES E LOGISTICA EIRELI": "TRANSITO",
+    "VIPEX TRANSPORTES LTDA": "VIPEX",
+    "MANDA LÁ TRANSPORTES DE CARGAS LTDA": "MANDALA",
+    "TRANSPORTADORA M.M.A LTDA": "MMA",
+    "TRANSNORTEX CARGAS EIRELI": "NORTEX",
+    "FORMATO TRANSPORTES LTDA": "FORMATO"
+};
+
 const coresMap = { 
     'PRETA': 'cor-preta', 'PRETO': 'cor-preta', 'AZUL': 'cor-azul', 
     'CINZA': 'cor-cinza', 'LARANJA': 'cor-laranja', 'BRANCO': 'cor-branco' 
@@ -81,7 +111,11 @@ document.getElementById('xmlInput').addEventListener('change', function(event) {
             const rawData = getTag("dhEmi");
             document.getElementById('outData').textContent = rawData ? rawData.split('T')[0].split('-').reverse().join('/') : "---";
             document.getElementById('outDestinatario').textContent = xmlDoc.querySelector("dest xNome")?.textContent || "---";
-            document.getElementById('outTransportadora').textContent = xmlDoc.querySelector("transporta xNome")?.textContent || "NÃO INFORMADO";
+            
+            // Lógica Transportadora
+            let transpNF = (xmlDoc.querySelector("transporta xNome")?.textContent || "NÃO INFORMADO").toUpperCase().trim();
+            document.getElementById('outTransportadora').textContent = transpMap[transpNF] || transpNF;
+
             document.getElementById('outVolumes').value = getTag("qVol") || "1";
 
             const itens = xmlDoc.getElementsByTagName("det");
