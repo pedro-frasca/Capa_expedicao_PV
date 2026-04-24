@@ -1,4 +1,3 @@
-// Dicionário de Transportadoras
 const transpMap = {
     "AMAZON TRANSPORTES LTDA": "AMAZON",
     "ATUAL CARGAS TRANSPORTES LTDA": "ATUAL",
@@ -38,11 +37,9 @@ function aplicarDestaques(texto, forcarModelo = false) {
     divTemp.innerHTML = texto;
     let nome = divTemp.innerText.toUpperCase();
 
-    // Substituições Técnicas
     nome = nome.replace(/\bCOLUNAS?\b/g, "MONTANTE");
     nome = nome.replace(/\bPRATELEIRAS?\b/g, "PAR DE LONGARINA");
 
-    // Lógica de Modelo (SLIM / MINI)
     if (nome.includes("MONTANTE") || nome.includes("LONGARINA")) {
         if (/\bSL\b/.test(nome)) {
             nome = nome.replace(/\bSL\b/g, '<span class="modelo-destaque">SLIM</span>');
@@ -55,7 +52,6 @@ function aplicarDestaques(texto, forcarModelo = false) {
         }
     }
 
-    // Cores
     Object.keys(coresMap).forEach(cor => {
         const regexCor = new RegExp(`\\b${cor}\\b`, 'g');
         if (regexCor.test(nome)) {
@@ -66,7 +62,6 @@ function aplicarDestaques(texto, forcarModelo = false) {
     return nome;
 }
 
-// Edição e Deleção
 document.querySelector("#tabelaItens").addEventListener('click', function(event) {
     if (event.target.classList.contains('btn-del')) event.target.closest('tr').remove();
 });
@@ -77,7 +72,6 @@ document.querySelector("#tabelaItens").addEventListener('blur', function(event) 
     }
 }, true);
 
-// Novo Item
 document.getElementById('addItemBtn').addEventListener('click', function() {
     const tbody = document.querySelector("#tabelaItens tbody");
     const tr = document.createElement("tr");
@@ -90,12 +84,10 @@ document.getElementById('addItemBtn').addEventListener('click', function() {
     tbody.appendChild(tr);
 });
 
-// Responsável
 document.getElementById('responsavelSelect').addEventListener('change', function() {
     document.getElementById('outResponsavel').textContent = this.value;
 });
 
-// XML Reader
 document.getElementById('xmlInput').addEventListener('change', function(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -112,7 +104,6 @@ document.getElementById('xmlInput').addEventListener('change', function(event) {
             document.getElementById('outData').textContent = rawData ? rawData.split('T')[0].split('-').reverse().join('/') : "---";
             document.getElementById('outDestinatario').textContent = xmlDoc.querySelector("dest xNome")?.textContent || "---";
             
-            // Lógica Transportadora
             let transpNF = (xmlDoc.querySelector("transporta xNome")?.textContent || "NÃO INFORMADO").toUpperCase().trim();
             document.getElementById('outTransportadora').textContent = transpMap[transpNF] || transpNF;
 
